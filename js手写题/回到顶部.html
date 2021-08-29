@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        height: 2000px;
+    }
+    #top{
+        width: 100%;
+        height: 100px;
+        background: red;
+    }
+</style>
+<body>
+    <div id="top"></div>
+    <button id="test" style="position: fixed; right: 0; bottom: 10px;">回到顶部</button>
+    
+    <script>
+        let test = document.getElementById('test');
+        // //1 直接设置scrolltop的值为0
+        // var timer = null;
+        // test.onclick = function(){
+        //     cancelAnimationFrame(timer);
+        //     timer = requestAnimationFrame(function fn(){
+        //         var oTop = document.body.scrollTop||document.documentElement.scrollTop;
+        //         if(oTop > 0){
+        //             document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+        //             timer = requestAnimationFrame(fn);
+        //         }
+        //         else{
+        //             cancelAnimationFrame(timer);
+        //         }
+        //     })
+            
+        // }
+
+
+        // //2 滚动到0，0
+        // var timer = null;
+        // test.onclick = function(){
+        //     cancelAnimationFrame(timer);
+        //     timer = requestAnimationFrame(function fn(){
+        //         var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        //         if(oTop > 0){
+        //             scrollTo(0,oTop - 50);
+        //             timer = requestAnimationFrame(fn);
+        //         }else{
+        //             cancelAnimationFrame(timer);
+        //         }
+        //     })  
+        // }
+
+
+        
+        //3 按移动距离 向上移动 -scrollTop
+        var timer = null;
+        test.onclick = function(){
+            cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(function fn(){
+                var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+                if(oTop > 0){
+                    scrollBy(0,-50);
+                    timer = requestAnimationFrame(fn);
+                }else{
+                    cancelAnimationFrame(timer);
+                }
+            })
+        }
+
+
+        // //4 在头部指定目标元素 移动到目标盒子的位置
+        // test.onclick = function(){
+        //     let top = document.getElementById('top');
+        //     top.scrollIntoView();
+        // }
+
+        
+    </script>
+</body>
+</html>

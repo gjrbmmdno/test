@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(name,age){
+      this.name = name;
+      this.age = age;
+    }
+
+    Person.prototype.sayHi = function(){
+      console.log(`My name is ${this.name} and my age is ${this.age}`);
+    }
+    
+
+
+    function myNew(){
+      let obj = {};
+      let con = Array.prototype.shift.call(arguments);
+
+      //链接到原型（给obj这个新生对象的原型指向它的构造函数的原型）
+      obj.__proto__  = con.prototype;
+      
+      let result = con.apply(obj,arguments);
+       
+      //确保返回的是一个对象(万一con不是构造函数)
+      return typeof result === "Object" ? result:obj;
+    }
+    
+    
+    let laozi = myNew(Person,'gjr',24);
+    laozi.sayHi()
+
+
+
+
+
+
+
+  
+    
+    
+  </script>
+</body>
+</html>

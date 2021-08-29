@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    let obj = {
+      id:'1',
+      name:'gjr',
+      msg:{
+        age:18,
+        weight:120,
+        height:173,
+      }
+    }
+    
+    function deepClone(obj){
+      if(typeof(obj) !== 'object') return;
+
+      let newObj = obj instanceof Array? [] : {};
+      for(let key in obj){
+        newObj[key] = typeof(obj[key]) === 'object'? deepClone(obj[key]) : obj[key];
+      }
+      return newObj;
+    }
+
+    console.log(deepClone(obj));
+
+  </script>
+</body>
+</html>

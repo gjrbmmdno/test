@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .news {
+  background-color: gray;
+  border: solid 1px black;
+ }
+
+.news .p1 {
+  float: left;
+ }
+
+.news .p2 {
+  float: right;
+ }
+
+.clear {
+  clear: both;
+ }
+
+ /**
+在浮动元素后使用一个空元素如<div class="clear"></div>，并在CSS 中予.clear{clear:both;}
+属性即可清理浮动。亦可使用<br class="clear" />或<hr class="clear" />来进行清理。
+*/
+
+
+/**
+优点：简单，代码少，浏览器兼容性好。
+缺点：需要添加大量无语义的html元素，代码不够优雅，后期不容易维护。
+*/
+</style>
+<body>
+  <div class="news">
+    <p class="p1">some text p1</p>
+    <p class="p2">some text p2</p>
+    <div class="clear"></div>
+</div>
+</body>
+</html>

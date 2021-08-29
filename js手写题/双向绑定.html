@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        .target{
+            margin-top: 100px   ;
+        }
+    </style>
+<body>
+    <div class="target"></div>
+    <input type="text">
+    <script>
+        let obj = {};
+        
+        function watch(obj, name, callback){
+            let value = obj.name
+            Object.defineProperty(obj,name,{
+                
+                set(msg){
+                    console.log(msg);
+                    value = msg
+                    callback(value)
+                },
+                get(){
+                    return value
+                }
+                
+            })
+        }
+
+        function doSomeThing(value){
+            document.querySelector('.target').innerHtml=value
+            document.querySelector('input').value = value
+        }
+        
+        document.querySelector('input').addEventListener('input',(e)=>{
+            obj['msg'] = e.target.value
+        })  
+
+        watch(obj,'msg',doSomeThing)
+
+    </script>
+</body>
+</html>

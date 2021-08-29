@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    let url = './ajax封装成promise/test.json';
+  
+    // function myAjax(url){
+    //   let xhr = new XMLHttpRequest();
+    //   xhr.open('get',url);
+    //   xhr.send(null);
+    //   xhr.onreadystatechange = ()=>{
+    //     if(xhr.readyState === 4){
+    //       if(xhr.status >= 200 && xhr.status <=300){
+    //         let object = JSON.parse(xhr.responseText);
+    //         console.log(object);
+    //       }else{
+    //         throw new Error('出错');
+    //       }          
+    //     }
+        
+    //   }
+    // }
+    // myAjax(url)    
+
+    function myAjax(url){
+      let p = new Promise((resolve,reject)=>{
+        let xhr = new XMLHttpRequest();
+        xhr.open('get',url);
+        xhr.send();
+        xhr.onreadystatechange = ()=>{
+          if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status <= 300){
+              resolve(JSON.parse(xhr.responseText));
+            }else{
+              reject('出错');
+            }
+          }
+        }
+      });
+      return p;
+    }
+
+    myAjax(url).then(res=>{
+      console.log(res);
+    }).catch(err=>{
+      console.log(err);
+    })
+
+
+  </script>
+
+</body>
+</html>

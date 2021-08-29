@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Array.prototype.myMap = function(fn,toThis){
+    //   let res = [];
+    //   let redirectThis = toThis || [];
+    //   let arr = this;
+    //   for(let i=0; i<arr.length; i++){
+    //     res.push(fn.call(redirectThis, arr[i], i, arr));
+    //   }
+    //   return res;
+    // }
+    
+    // Array.prototype.myMap2 = function(fn,thisValue){
+    //   let res = [];
+    //   thisValue = thisValue || [];
+    //   this.reduce(function(pre, cur ,index, arr){
+    //     res.push(fn.call(thisValue, cur, index, arr));
+    //   },[]);
+    //   return res;
+    // }
+    
+
+    // let a = [1,2,3];
+    // console.log(a.myMap2(function(item,index,arr){
+    //   console.log(this.gjr, item, index ,arr);
+    //   return item ** 2;
+    // },{gjr:18}));
+
+   
+    Array.prototype.myMap = function(fn,thisValue){
+      thisValue = thisValue || [];
+      let res = [];
+      let arr = this;
+      for(let i=0; i<arr.length; i++){
+        res.push(fn.call(thisValue,arr[i],i,arr));
+      }      
+      return res;
+    }
+
+    let a=[1,2,3];
+    let b = a.myMap((item)=>{
+      return item * 2;
+    });
+    console.log(...b);
+    
+
+
+  </script>
+</body>
+</html>

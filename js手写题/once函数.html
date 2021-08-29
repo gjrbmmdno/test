@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function once(fn){
+            var flag = true;
+            return function(){
+                if(flag){
+                    flag = false;
+                    fn()
+                }
+            }
+        }
+
+        function getName(){
+            console.log('我是gjr');
+        }
+
+
+        getName2 = once(getName)
+        getName2()
+        getName2()
+        getName2()
+        getName2()
+        getName2()
+        getName2()
+
+
+    </script>
+</body>
+</html>

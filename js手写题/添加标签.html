@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="parent"></div>
+    <script>
+        // function addElementDiv(obj){
+        //     var parent = document.getElementById(obj);
+        //     var div = document.createElement('div');
+        //     div.setAttribute("id","newDiv");
+        //     div.innerHTML = "js动态添加div";
+        //     parent.appendChild(div);
+
+        // }
+        // addElementDiv("parent")
+        
+
+        //生成100个标签
+        //生成100个div
+
+        var oBox = document.getElementById('parent');
+
+        var str = '';
+
+        for (var i = 0; i < 100; i++) {
+            str += '<div>' + (i + 1) + '</div>';
+
+        }
+
+        oBox.innerHTML = str;
+
+    </script>
+</body>
+</html>

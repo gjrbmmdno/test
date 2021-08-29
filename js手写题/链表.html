@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Node(val){
+      this.val = val;
+      this.next = null;
+    }
+    
+    function ArrayList(node){
+      this.head = new Node(node);
+
+      this.find = function (target){
+        var current = this.head;
+        while(current.val !== target){
+          current = current.next;
+          if(!current){
+            return false;
+          }    
+        }
+        return current;
+      }
+
+      this.insert = function(newNode,target){
+        var newnode = new Node(newNode);
+        var current = this.find(target);
+        newnode.next = current.next;
+        current.next = newnode;
+      }
+      
+      this.findPre = function(item){
+        var current = this.head;
+        while(!current.next && current.next.){
+          
+        }
+      }
+
+
+      this.delete = function(target){
+        
+        
+      }
+
+
+
+    }
+
+  </script>
+</body>
+</html>

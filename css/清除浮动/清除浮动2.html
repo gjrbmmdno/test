@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .news {
+  background-color: gray;
+  border: solid 1px black;
+  overflow: hidden;
+ }
+
+.news .p1 {
+  float: left;
+ }
+
+.news .p2 {
+  float: right;
+ }
+
+
+
+/**
+给浮动元素的容器添加overflow:hidden;或overflow:auto;可以清除浮动，另外在IE6 中还
+需要触发hasLayout ，例如为父元素设置容器宽高或设置zoom:1。
+在添加overflow 属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清理浮动
+的效果。
+*/
+
+</style>
+<body>
+  <div class="news">
+    <p class="p1">some text p1</p>
+    <p class="p2">some text p2</p>
+    
+  </div>
+
+</body>
+</html>

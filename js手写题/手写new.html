@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        function newOperator(ctor){
+            if(typeof ctor !== 'function'){
+                console.log('newOperate function the first param must the function');
+            }
+            
+            //new.target 指向构造函数
+            newOperator.target = ctor;
+            
+            //1创建一个全新 的对象
+            //2并且执行[[prototype]]链接
+            //3通过new创建的每个对象将最终被[[prototype]]链接到这个函数的prototype对象上
+            var newObj = Object.create(ctor.prototype);
+            
+            //除去ctor构造函数的其余参数
+            var argsArr = [].slice.call(arguments,1);
+            
+            //3生成的新对象会绑定到函数调用的'this
+            //获取到ctor构造函数返回结果
+            var ctorReturnResult = ctor.apply(newObj,argsArr)
+            
+            
+
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const PENDING = "pending";
+    const FULFILLED = "fulfilled";
+    const REJECTED = "rejected";
+
+    function myPromise(fn){
+      console.log(1);
+      let that = this;
+      that.state = PENDING; //Promise初始状态
+      that.value = null;  // then回调的值
+      that.resolvedCallBacks = []; // resolve时触发的成功队列
+      that.rejectedCallBacks = []; // reject时触发的失败队列
+
+      function resolve(value){
+        console.log(2);
+        if(that.state ===  PENDING){
+          that.value = value;
+          that.resolvedCallBacks.map(item=>that.value);
+        }
+      }
+      
+      function reject(value){
+        console.log(3);
+        if(that.state === PENDING){
+          that.value = value;
+          that.rejectedCallBacks.map(item=>that.value);
+        }
+      }
+
+      try{
+        console.log(4);
+        fn(resolve,reject);
+      }catch{
+        console.log(5);
+        reject(e)
+      }
+
+    }
+
+    myPromise.prototype.then = function(onFulfilled, onRejected){
+      const that = this;
+      console.log(6);
+
+      // 首先判断两个参数是否为函数类型，因为这两个参数是可选参数
+      // 当参数不是函数类型时，需要创建一个函数赋值给对应的参数，同时也实现了透传
+
+      onFulfilled = typeof onFulfilled === "function" ? onFulfilled: v=>v;
+      onRejected = typeof onRejected === "function" ? onRejected: r=>{throw r};
+      
+      if(that.state === PENDING){
+        that.resolvedCallBacks.push(onFulfilled);
+        that.rejectedCallBacks.push(onRejected);
+      }
+      if(that.state === FULFILLED){
+        onFulfilled(that.value);
+      }
+      if(that.state === REJECTED){
+        onRejected(that.value)
+      }
+      
+    }
+
+
+
+    let promise = new myPromise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve(1)
+      },3000)
+    }).then(res=>{
+      console.log(res);
+      console.log(7);
+    },err=>{
+      console.log(8);
+    })
+  </script>
+</body>
+</html>

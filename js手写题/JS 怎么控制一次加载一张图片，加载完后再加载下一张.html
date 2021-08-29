@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myPic">onloading</div>
+    <script>
+        // 只要能监控到图片是否加载完成 就能实现了
+        // 要把图片当成是图片对象才行；
+
+
+        // //方法一
+        // var obj = new Image();
+        // obj.src = "http://www.phpernote.com/uploadfiles/editor/201107240502201179.jpg";
+        // obj.onload= function(){
+        //     alert("图片的宽度为"+obj.width + "图片的高度为" + obj.height);
+        //     document.getElementById('myPic').innerHTML=`<img src="${this.src}"/>`;
+        // }
+
+        //方法二
+        var obj=new Image();
+        obj.src="http://www.phpernote.com/uploadfiles/editor/201107240502201179.jpg";
+
+        obj.onreadystatechange=function(){
+            if(this.readyState=="complete"){
+                alert('图片的宽度为：'+obj.width+'；图片的高度为：'+obj.height);
+                document.getElementById("mypic").innnerHTML=`<img src=${this.src}/>`;
+            }
+        }
+
+    console.log(typeof null);
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    function add(){
+      let args = Array.prototype.slice.call(arguments);
+
+      let _adder = function(){
+        args.push(...arguments);
+        return _adder;
+      }
+      
+      _adder.toString = function(){
+        return args.reduce((a,b)=>a+b)
+      }
+      
+      return _adder;
+
+    }
+
+    //每次调用的时候进行了隐式调用
+    let res = add(1,2)(3)(4)(5)(6,7);
+    console.log(res);
+  </script>
+</body>
+</html>

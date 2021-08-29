@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    
+
+    class newPromise{
+      constructor(executor){
+
+        if(typeof executor !== 'function'){
+          throw new Error(`this executor ${executor} is not a function`);
+        }
+
+
+        this.state = 'pending';
+        this.value = undefined;
+        this.reason = undefined;
+
+        this.onFulfilledCallback = [];
+        this.onRejectedCallback = [];
+        
+        
+        let resolve = value =>{
+          if(this.state === 'pending'){
+            this.state = 'fulfilled';
+            this.value = value;
+            this.onFulfilledCallback.forEach(fn=>fn(this.value));
+          }
+        };
+
+        let reject = reason =>{
+          if(this.state === 'pending'){
+            this.state = 'rejected';
+            this.reason = reason;
+            this.onRejectedCallback.forEach(fn=>fn(this.reason));
+          }
+        };
+        try{
+          executor(resolve,reject);
+        }catch (err){
+          reject(err)
+        }
+      }
+      then(onFulfilled,onRejected){
+
+        if(typeof onFulfilled !== 'function'){
+          onFulfilled = value => value;
+        }
+
+        if(typeof onRejected !== 'function'){
+          onRejected = reason => {throw reason;}
+        }
+        //------------------------------------------
+
+
+        const promise2 = new newPromise((resolve,reject)=>{
+          
+          if(this.state === 'fulfilled'){
+            setTimeout(()=>{
+              try{
+                const x = onFulfilled(this.value);
+              }catch (err){
+                reject(err);
+              }
+              
+            })
+          }
+
+          else if(this.state === 'rejected'){
+            setTimeout(()=>{
+              try{
+                const x = onRejected(this.reason);
+              }catch (err){
+                reject(err);
+              }              
+            })
+          }
+          
+          else if(this.state === 'pending'){
+            this.onFulfilledCallback.push((value)=>{
+              setTimeout(()=>{
+                try{
+                  const x = onFulfilled(value);
+                }catch(err){
+                  reject(err);
+                }                
+              })
+            })
+
+            this.onRejectedCallback.push((reason)=>{
+              setTimeout(()=>{
+                try{
+                  const x=  onRejected(reason);
+                }catch(err){
+                  reject(err);
+                }
+              })
+            })
+          }
+
+        })
+
+        return promise2;
+      }
+      
+      resolvePromise(promise2, x, resolve, reject) {
+        
+      }
+      
+    }
+    
+    // console.log(1);
+    // new Promise((resolve,reject)=>{
+    //   resolve(2);
+    // }).then(res=>{
+    //   console.log(res);
+    //   return new Promise((resolve,reject)=>{
+    //     resolve(3);
+    //   })
+    // }).then(res=>{
+    //   console.log(res);
+    // })
+
+
+    console.log(1);
+    new newPromise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve(2);
+      },1000)
+    }).then(res=>{
+      console.log(res);
+      return 
+    }).then(res=>{
+      console.log(res);
+    })
+  </script>
+</body>
+</html>

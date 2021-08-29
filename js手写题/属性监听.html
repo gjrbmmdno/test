@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: 'itclanCoder',
+            phone: 13711767328,
+        };
+        
+        // Object.defineProperty(obj, 'phone', {
+        //     configurable: true, // 属性可配置
+        //     set: function (v) {
+        //         console.log('phone发生了变化');
+        //         this.phone = v;
+        //     },
+        
+        //     get: function () {
+        //         return this.phone;
+        //     },
+        // });
+        // obj.phone = 13711767320;
+
+
+        var handler = {
+            set: function(target, name, value){
+                console.log('phone发生了变化');
+                target[name] = value;
+            }
+
+        }
+        var proxy = new Proxy(obj, handler)
+        
+        proxy.phone = 13711767320;
+    </script>
+</body>
+</html>

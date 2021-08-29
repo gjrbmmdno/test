@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    let str = '15974253186';
+    let arr = str.split("").map(item=> Number(item));
+    
+    // //选择排序
+    // function selectSort(arr){
+    //   for(let i=0; i<arr.length-1; i++){
+    //     let index = i;
+    //     let min = arr[index];
+    //     for(let j=i+1; j<arr.length; j++){
+    //       if(arr[j] < min){
+    //         index = j;
+    //         min = arr[index];
+    //       }
+    //     }
+    //     [arr[i],arr[index]] = [arr[index],arr[i]];
+    //   }
+    //   return arr;
+    // }
+    // console.log(selectSort(arr));
+    
+
+    // //插入排序
+    // function insertSort(arr){
+    //   for(let i=1; i<arr.length; i++){
+    //     for(let j=i; j>0; j--){
+    //       if(arr[j-1] < arr[j]) break;
+    //       [arr[j-1],arr[j]] = [arr[j],arr[j-1]];
+    //     }
+    //   }
+    //   return arr;
+    // }
+    // console.log(insertSort(arr));
+
+
+
+    // //冒泡排序
+    // function bubbleSort(arr){
+    //   let temp;
+    //   for(let i=0; i<arr.length-1; i++){
+    //     for(let j=arr.length-1; j>i; j--){
+    //       if(arr[j] < arr[j-1]){
+    //         temp = arr[j];
+    //         arr[j] = arr[j-1];
+    //         arr[j-1] = temp;
+    //       }
+    //     }
+    //   }
+    //   return arr;
+    // }
+    // console.log(bubbleSort(arr));
+
+
+
+    // //快排
+    // function quickSort(arr,start,end){
+    //   if(start<end){
+    //     let pivotIdx = oneQuickSort(arr,start,end);
+    //     quickSort(arr,start,pivotIdx-1);
+    //     quickSort(arr,pivotIdx+1,end);
+    //   }
+    // }
+
+    // function oneQuickSort(arr, start,end){
+    //   let left = start;
+    //   let right = end;
+    //   let pivot = arr[left];
+    //   while(left < right){
+    //     while(left < right && arr[left] <= pivot){
+    //       left++;
+    //     }
+    //     while(left < right && arr[right] > pivot){
+    //       right--;
+    //     }
+    //     if(left < right){
+    //       swap(arr,right,left);
+    //     }
+    //   }
+    //   right--;
+    //   swap(arr,start,right);
+    //   return right;
+    // }
+
+    // function swap(arr,i,j){
+    //   [arr[i],arr[j]] = [arr[j],arr[i]];
+    // }
+
+    // let arr2 = [5,2,6,4,1,7,9,0];
+    // quickSort(arr,0,arr.length-1);
+    // console.log(...arr);
+
+
+
+    // //归并排序
+    // function mergeSort(arr){
+    //   let len = arr.length;
+    //   if(len<2){
+    //     return arr;
+    //   }
+    //   let mid = Math.floor(arr.length/2);
+    //   let left = mergeSort(arr.slice(0,mid));
+    //   let right = mergeSort(arr.slice(mid));
+      
+    //   return merge(left,right);
+    // }
+
+
+    // function merge(left,right){
+    //   let res = [];
+    //   while(left.length && right.length){
+    //     if(left[0] <= right[0]){
+    //       res.push(left.shift());
+    //     }else{
+    //       res.push(right.shift());
+    //     }
+    //   }
+
+    //   res = res.concat(left.length ? left:right);
+    //   return res;
+    // }
+
+
+    // console.log(...mergeSort(arr));
+
+
+    
+var sortArray = function(nums) {
+
+quickSort(nums,0,nums.length-1);
+return nums;
+};
+
+
+function quickSort(nums,start,end){
+if(start < end){
+    let pivotIdx = oneQuickSort(nums,start,end);
+    quickSort(nums,start,pivotIdx-1);
+    quickSort(nums,pivotIdx+1,end);    
+}
+}
+
+
+function oneQuickSort(nums, start, end){
+
+let left = start;
+let right = end;
+let pivotIdx = Math.floor((left + right) / 2);
+let pivot = nums[pivotIdx];
+swap(nums,start,pivotIdx);
+
+
+while(left < right){
+    while(left < right && nums[left] <= pivot){
+        left++;
+    }
+    while(left < right && nums[right] > pivot){
+        right--;
+    }
+    if(left < right){
+        swap(nums,left,right);
+    }
+}
+right--;
+swap(nums,right,start);
+return right;
+}
+
+function swap(nums,i,j){
+[nums[i],nums[j]] = [nums[j],nums[i]];
+}
+
+console.log(sortArray(arr));
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .drag{
+    background-color: skyblue;
+    position: absolute;
+  }
+</style>
+<body>
+    <div class="drag" id="drag" style="width: 100px;height: 100px;"></div>
+
+
+  
+    <script type="text/javascript">
+        window.onload = function (){
+      
+            let dragdiv = document.getElementById('drag');
+
+        
+            dragdiv.onmousedown = function(e){
+                var diffX = e.clientX - dragdiv.offsetLeft;
+                var diffY = e.clientY - dragdiv.offsetTop;
+                document.onmousemove = function(e){
+                    var moveX = e.clientX - diffX;
+                    var moveY = e.clientY - diffY;
+                    if(moveX < 0){
+                        moveX =0;
+                    }else if(moveX >= window.innerWidth - dragdiv.offsetWidth){
+                        moveX = window.innerWidth - dragdiv.offsetWidth;
+                    }
+                    if(moveY < 0){
+                        moveY = 0;
+                    }else if(moveY >= window.innerHeight - dragdiv.offsetHeight){
+                        moveY = window.innerHeight - dragdiv.offsetHeight;
+                    }
+                    
+                    dragdiv.style.left = moveX + 'px';
+                    dragdiv.style.top = moveY + 'px';
+                }
+                document.onmouseup = function(e){
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+                }
+            }
+        }
+
+      // dragdiv.onmousedown = function(event){
+      //   var diffx = event.clientX - dragdiv.offsetLeft;
+      //   var diffy = event.clientY - dragdiv.offsetTop;
+      //   document.onmousemove = function(event){
+      //     var moveX = event.clientX - diffx;
+      //     var moveY = event.clientY - diffy;
+      //     if(moveX < 0){
+      //       moveX = 0;
+      //     }
+      //     else if(moveX > window.innerWidth - dragdiv.offsetWidth){
+      //       moveX = window.innerWidth - dragdiv.offsetWidth;
+      //     }
+      //     if(moveY < 0){
+      //       moveY = 0;
+      //     }else if(moveY > window.innerHeight - dragdiv.offsetHeight){
+      //       moveY = window.innerHeight - dragdiv.offsetHeight
+      //     }
+
+      //     dragdiv.style.left = moveX + 'px';
+      //     dragdiv.style.top = moveY + 'px';
+
+      //   }
+      
+      //   document.onmouseup = function(event){
+      //     this.onmousemove = null;
+      //     this.onmouseup = null;
+      //   }
+      
+      // }
+      
+
+
+    // }
+    
+
+</script>
+</body>
+</html>

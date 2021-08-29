@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <ul>
+        <li class="one">520</li>
+        <li>520</li>
+        <li>520</li>
+        <li>520</li>
+        <li>520</li>
+    </ul>
+  </div>
+  <script>
+    var ul = document.querySelector('ul');
+    // var li = document.querySelector('.one');
+    
+    // li.addEventListener('click', function(e){
+    //   alert('li');
+    //   e.stopPropagation();
+
+    // })
+    
+    ul.addEventListener('click', function() {
+      alert('ul');
+      return false;
+    })
+    var div = document.querySelector('div');
+    div.addEventListener('click', function(e) {
+        alert('div');
+        e.stopPropagation();
+    })
+    var body = document.querySelector('body');
+    body.addEventListener('click', function() {
+        alert('body');
+    })
+
+  </script>
+</body>
+</html>
